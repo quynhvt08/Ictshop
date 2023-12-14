@@ -1,0 +1,39 @@
+﻿@using Ictshop.Models
+@model Sanpham
+
+
+@{
+    ViewBag.Title = "xemchitiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<CENTER>
+    <div>
+        <h2>CHI TIẾT SẢN PHẨM</h2>
+        <img src="@Url.Content("~" +@Model.Anhbia)" />
+        <br />
+        <h3> @Model.Tensp</h3>
+        <h3 style="color:red">Giá :  @String.Format("{0:0,0}", @Model.Giatien) VND</h3>
+        <h4 style="color:red"> <del> @String.Format("{0:0,0}", @Model.Giabandau) VND </del> (-10%) </h4>
+
+        <br />
+        @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMasp = Model.Masp, @strURL = Request.Url.ToString() }))
+        {
+            <button style="padding: 20px 40px; color: white; background-color: black" onclick="chuyenHuongVaHienForm()">Mua hàng</button>
+            <input style="padding: 20px 40px ; color:white ; background-color: black" type="submit" value="Thêm giỏ hàng" id="bgnGioHang" />
+        }
+
+        <br />
+        <div style=" float:left">
+            <h3> <b>Thông tin sản phẩm :</b>  @Model.Tensp , dung lượng : @Model.Bonhotrong GB, Số thẻ sim : @Model.Thesim</h3>
+        </div>
+
+        <div style=" float:left">
+            <h3> <b>Mô tả sản phẩm :</b>  @Model.Mota </h3>
+        </div>
+        <br />
+    </div>
+
+</CENTER>
+

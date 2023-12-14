@@ -1,0 +1,28 @@
+﻿@using Ictshop.Models;
+@model List<Hangsanxuat>
+
+
+
+<br />
+
+<div style="background-color: #F0F0F0" class="bg-success">
+
+    <h3> DANH MỤC  </h3>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4" style="margin-bottom: 20px;">
+                <div style="flex: 1; text-align: center; padding: 10px; background-color: black; border-radius: 25px ">
+                    <button class="btn btn-primary" style="background-color: transparent; border: none;">
+                        <a href="@Url.Action("dttheohang", "Sanpham", new { brandId = item.Mahang })" style="color: white; text-decoration: none; font-size: 18px;">@item.Tenhang</a>
+
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+

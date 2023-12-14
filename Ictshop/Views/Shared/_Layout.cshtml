@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Shop Điện thoại </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel=" stylesheet" href="~/Content/Style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    @using Ictshop.Models
+
+    <style type="text/css">
+        body {
+            background-color: #F0F0F0;
+        }
+
+        .navbar-inverse {
+            background-color: red;
+            border-color: #39B54A;
+        }
+
+        .top_header {
+            background-color: black;
+            padding-left: 110px;
+            color: white;
+        }
+
+        .form-inline {
+            float: right;
+            padding-top: 10px;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: white;
+            font-size: x-large;
+        }
+
+        .navbar-inverse .navbar-brand {
+            color: white;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: white;
+            font-size: large;
+        }
+
+            .navbar-inverse .navbar-nav > li > a:hover {
+                color: black;
+            }
+
+        .navbar-brand {
+            color: cadetblue;
+        }
+
+        .spnoibat {
+            background-color: white;
+        }
+
+            .spnoibat h3 {
+                padding-left: 30px;
+            }
+
+        .giohang {
+            color: white;
+        }
+
+        @* menu *@
+        .navbar-inverse .navbar-nav > li.dropdown:hover > a {
+            color: black;
+        }
+
+        .navbar-inverse .navbar-nav > li.dropdown:hover > ul.dropdown-menu {
+            display: block;
+        }
+
+        .navbar-inverse .navbar-nav > li > ul.dropdown-menu {
+            background-color: #f9f9f9;
+        }
+
+            .navbar-inverse .navbar-nav > li > ul.dropdown-menu > li > a {
+                color: black;
+            }
+
+                .navbar-inverse .navbar-nav > li > ul.dropdown-menu > li > a:hover {
+                    background-color: #ddd;
+                }
+    </style>
+
+
+</head>
+
+<body>
+
+    @{ var u = Session["use"] as Ictshop.Models.Nguoidung; }
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="top_header col-md-12">
+
+            <div class="row" style=" padding: 5px 5px 5px 5px">
+
+
+                @*@Html.Action("GioHangPartial", "GioHang",new { @style = "color:while" })*@
+                @{ if (u != null)
+                    {
+                        <div class="col-sm-4 col-md-0">
+                            <a style="color:white" href="@Url.Action("Profile", "User", new { id = u.MaNguoiDung  })"> Xin chào : @u.Email</a>
+                            &nbsp;
+                            @*@Html.ActionLink("ĐĂNG XUẤT", "DangXuat", "User", new { style = "color:red" })*@
+                            <a style="color:red" href="/User/DangXuat"> ĐĂNG XUẤT</a>
+                        </div> }
+                    else
+                    {
+                        <div style="float:right" class="col-sm-4 col-md-0">
+                            <a style="  color: white" href="/User/Dangky"> Đăng ký</a>
+                            &nbsp;
+                            <a style="  color: white" href="/User/Dangnhap"> Đăng nhập</a>
+                        </div> } }
+
+
+            </div>
+
+        </div>
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img class="navbar-brand" src="~/HinhanhSP/logo.png" width="50" height="50" style="padding:0" />
+                @Html.ActionLink("ICT", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+
+                <form class="form-inline" style="float:left" id="searchForm">
+                    @using (Html.BeginForm("KQTimKiem", "Sanpham", FormMethod.Post, new { id = "searchForm" }))
+                    {
+                        <input type="text" name="keyword" id="keyword" placeholder="Tìm kiếm sản phẩm..." />
+                        <input type="submit" value="Tìm" />
+
+
+                    }
+                </form>
+
+
+                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                <script>
+                    function submitSearch() {
+                        var keyword = $('#searchForm input[name="keyword"]').val();
+
+                        // Kiểm tra xem từ khóa có tồn tại không
+                        if (keyword) {
+                            // Thay đổi đường dẫn URL
+                            var newUrl = '/SanPham/KQTimKiem?keyword=' + encodeURIComponent(keyword);
+                            window.location.href = newUrl;
+                        } else {
+                            // Xử lý khi không có từ khóa
+                            alert('Vui lòng nhập từ khóa tìm kiếm.');
+                        }
+                    }
+                </script>
+
+
+            </div>
+
+            <div class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav">
+                    
+                        @*<a href="#" title="dienthoai">
+                <span>DANH MỤC</span>
+                <span><i class=" fa fa-bars "></i></span>
+            </a>*@
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">DANH MỤC</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Apple", "Sanpham")">Apple</a></li>
+                            <li><a href="@Url.Action("Samsung", "Sanpham")">Samsung</a></li>
+                            <li><a href="@Url.Action("Xiaomi", "Sanpham")">Xiaomi</a></li>
+                            <li><a href="#">Vsmart</a></li>
+                            <li><a href="#">Bphone</a></li>
+                        </ul>
+                    
+
+                    </li>
+
+
+
+                    <li>
+                        <a href="/Home/Contact" title="LIENHE">
+                            <span>LIÊN HỆ</span>
+                            <span><i class="fa fa-phone"></i></span>
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "DonHangs")" title="DONHANG">
+                            <span>ĐƠN HÀNG</span>
+                            <span><i class="fa-box"></i></span>
+
+                        </a>
+                    </li>
+
+                    <li>
+
+                        @Html.Action("GioHangPartial", "GioHang", new { @class = "giohang" })
+
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+
+    <br>
+
+    <div class="container body-content">
+        <div id="searchResults"></div>
+
+        @RenderBody()
+        <hr />
+        <div>
+            <img class="img-responsive" src="~/HinhanhSP/ban2.jpg" />
+        </div>
+        <br />
+    </div>
+    <footer class="bg-info" style="padding-left:50px">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <h2>Bảo hành</h2>
+                <span>Chính sách mua hàng</span>
+                <br />
+                <span>Chính sách bảo hành</span>
+                <br />
+                <span>Trung tâm bảo hành</span>
+                <br />
+                <span>Tra cứu bảo hành</span>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h2>Liên kết</h2>
+                <span>Tin tức Mobile</span>
+                <br />
+                <span>Lập trình Web</span>
+                <br />
+                <span>GenkVN</span>
+                <br />
+                <span>Dân trí</span>
+
+
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h2>Thông tin</h2>
+                <span>Về chúng tôi</span>
+                <br />
+                <span>Liên hệ</span>
+                <br />
+                <span>Góp ý</span>
+                <br />
+                <span>Tra cứu</span>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h2>Theo dõi</h2>
+                <span>Kênh youtube</span>
+                <br />
+                <span>Fanpage</span>
+                <br />
+                <span>Shopee</span>
+                <br />
+                <span>Group</span>
+
+            </div>
+        </div>
+        <hr />
+        <center> <p class="bg-primary">&copy; @DateTime.Now.Year - IctShop</p></center>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#searchForm").submit(function (event) {
+            event.preventDefault();
+
+            var keyword = $("#keyword").val();
+
+            // Thực hiện yêu cầu Ajax
+            $.ajax({
+                url: '@Url.Action("TimKiem", "Sanpham")',
+                type: 'POST',
+                data: { keyword: keyword },
+                success: function (data) {
+                    // Hiển thị kết quả trong phần tử có ID là "searchResults"
+                    $("#searchResults").html(data);
+
+                    // Xóa giá trị trong ô tìm kiếm để cho phép tìm kiếm lần tiếp theo
+                    $("#keyword").val('');
+                },
+                error: function () {
+                    console.log('Error');
+                }
+            });
+        });
+    });
+</script>
+
+
