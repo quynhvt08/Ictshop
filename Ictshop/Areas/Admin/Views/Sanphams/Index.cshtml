@@ -25,6 +25,9 @@
             @Html.DisplayNameFor(model => model.Giatien)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Giabandau)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Soluong)
         </th>
         <th>
@@ -63,6 +66,9 @@
             @String.Format("{0:0,0}", item.Giatien) VNĐ
         </td>
         <td>
+            @String.Format("{0:0,0}", item.Giabandau) VNĐ
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Soluong)
         </td>
         <td>
@@ -83,10 +89,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Anhbia)
         </td>
+
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Masp }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Masp }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Masp })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Masp }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Masp }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Masp })
         </td>
     </tr>
 }

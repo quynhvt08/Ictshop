@@ -1408,6 +1408,11 @@
     <Content Include="Views\Sanpham\Apple.cshtml" />
     <Content Include="Views\Sanpham\Samsung.cshtml" />
     <Content Include="Views\Sanpham\Xiaomi.cshtml" />
+    <Content Include="Views\Sanpham\spmoi.cshtml" />
+    <Content Include="Views\Danhmuc\Chinhsachmuahang.cshtml" />
+    <Content Include="Views\Danhmuc\Chinhsachbaomat.cshtml" />
+    <Content Include="Views\Danhmuc\Trungtambaohanh.cshtml" />
+    <Content Include="Views\Danhmuc\Thongtinbaohanh.cshtml" />
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.Config</DependentUpon>
     </None>

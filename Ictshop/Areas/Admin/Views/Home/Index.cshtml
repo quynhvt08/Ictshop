@@ -19,9 +19,15 @@
         <th>
             Tên sản phẩm
         </th>
+
         <th>
             Giá tiền
         </th>
+
+        <th>
+            Giá ban đầu
+        </th>
+
         <th>
             Số lượng
         </th>
@@ -52,6 +58,9 @@
     </td>
     <td>
         @String.Format("{0:0,0}", item.Giatien) VNĐ
+    </td>
+    <td>
+        @String.Format("{0:0,0}", item.Giabandau) VNĐ
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.Soluong)

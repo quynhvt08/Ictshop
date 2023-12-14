@@ -59,7 +59,7 @@ namespace Ictshop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Masp,Tensp,Giatien,Soluong,Mota,Thesim,Bonhotrong,Sanphammoi,Ram,Anhbia,Mahang,Mahdh")] Sanpham sanpham)
+        public ActionResult Create([Bind(Include = "Masp,Tensp,Giatien,Soluong,Mota,Thesim,Bonhotrong,Sanphammoi,Ram,Anhbia,Mahang,Mahdh,Giabandau")] Sanpham sanpham)
         {
             if (ModelState.IsValid)
             {
@@ -105,6 +105,7 @@ namespace Ictshop.Areas.Admin.Controllers
                 oldItem.Thesim = sanpham.Thesim;
                 oldItem.Mahang = sanpham.Mahang;
                 oldItem.Mahdh = sanpham.Mahdh;
+                oldItem.Giabandau = sanpham.Giabandau;
                 // lưu lại
                 db.SaveChanges();
                 // xong chuyển qua index

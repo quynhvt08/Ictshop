@@ -242,6 +242,7 @@ namespace Ictshop.Controllers
             }
 
             ddh.MaNguoidung = kh.MaNguoiDung;
+    
             ddh.Ngaydat = DateTime.Now;
             Chitietdonhang ctDH = new Chitietdonhang();
             ViewBag.tongtien = tongtien;

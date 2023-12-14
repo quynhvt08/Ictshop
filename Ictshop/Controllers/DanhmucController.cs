@@ -20,5 +20,21 @@ namespace Ictshop.Controllers
         {
             return View();
         }
+        public ActionResult Chinhsachmuahang()
+        {
+            return View();
+        }
+        public ActionResult Chinhsachbaomat()
+        {
+            return View();
+        }
+        public ActionResult Thongtinbaohanh()
+        {
+            return View();
+        }
+        public ActionResult Trungtambaohanh()
+        {
+            return View();
+        }
     }
 }
