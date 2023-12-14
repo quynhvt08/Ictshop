@@ -17,7 +17,11 @@ namespace Ictshop.Controllers
             var ip = db.Sanphams.Where(n=>n.Mahang==2).Take(8).ToList();
            return PartialView(ip);
         }
-
+        public ActionResult Apple()
+        {
+            var ip = db.Sanphams.Where(n => n.Mahang == 2).Take(8).ToList();
+            return PartialView(ip);
+        }
         public ActionResult dtsamsungpartial()
         {
             var ss = db.Sanphams.Where(n => n.Mahang == 1).Take(8).ToList();
