@@ -5,46 +5,118 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<br />
+<center><h2 style="color:blue">Top 5 khách hàng mua hàng nhiều nhất</h2></center>
 
-<center><h2 style="color:red">Top 5 khách hàng mua hàng nhiều nhất</h2></center>
-<br />
-
-<table class="table table-bordered">
-    <tr>
-        <th>
-            Tên khách hàng
-        </th>
-        <th>
-            Số điện thoại
-        </th>
-        <th>
-            Tổng tiền đã mua
-        </th>
-        <th>
-            Số lượng đơn hàng
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <table class="table table-bordered">
         <tr>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Tennguoidung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dienthoai)
-            </td>
-            <td>
-                @String.Format("{0:0,0}", item.Tongtien) VNĐ
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Soluong)
-            </td>
-
+            <th>
+                Tên khách hàng
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Tổng tiền đã mua
+            </th>
+            <th>
+                Số lượng đơn hàng
+            </th>
+            <th></th>
         </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tennguoidung)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dienthoai)
+                </td>
+                <td>
+                    @String.Format("{0:0,0}", item.Tongtien) VNĐ
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Soluong)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+<title>Biểu đồ Thống kê</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    .chart-container {
+        width: 700px;
+        height: 1000px;
+        position: relative;
+        margin: 50px;
     }
 
-</table>
+    canvas {
+        width: 100% !important;
+        height: auto !important;
+    }
+</style>
+
+<body>
+    <center><h3 style="color:aquamarine">Top 5 khách hàng mua hàng nhiều nhất</h3></center>
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var data = @Html.Raw(Json.Encode(Model));
+            var labels = data.map(item => item.Tennguoidung);
+            var tongtienData = data.map(item => item.Tongtien);
+
+            var colors = getRandomColors(data.length); // Tạo mảng màu từ danh sách màu
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Tổng Tiền',
+                        data: tongtienData,
+                        backgroundColor: colors, // Sử dụng mảng màu
+                        borderColor: 'rgba(173, 216, 230, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+
+        function getRandomColors(count) {
+            var predefinedColors = [
+                'rgba(173, 216, 230, 0.8)', // Light Blue
+                'rgba(144, 238, 144, 0.8)', // Light Green
+                'rgba(255, 255, 224, 0.8)', // Light Yellow
+                'rgba(255, 182, 193, 0.8)'  // Light Pink
+            ];
+
+            var colors = [];
+
+            for (var i = 0; i < count; i++) {
+                var color = predefinedColors[Math.floor(Math.random() * predefinedColors.length)];
+                colors.push(color);
+            }
+
+            return colors;
+        }
+    </script>
+</body>
+
+

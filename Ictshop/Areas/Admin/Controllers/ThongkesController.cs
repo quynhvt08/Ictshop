@@ -12,21 +12,46 @@ namespace Ictshop.Areas.Admin.Controllers
         private Qlbanhang db = new Qlbanhang();
 
         // GET: Admin/Thongkes
+        /*  public ActionResult Index()
+          {
+              var donhangs = db.Donhangs.ToList();
+              var dataThongke = (from s in db.Donhangs
+                        join x in db.Nguoidungs on s.MaNguoidung equals x.MaNguoiDung
+                        group s by s.MaNguoidung into g
+                        select new Thongke
+                        {
+                            Tennguoidung = g.FirstOrDefault().Nguoidung.Hoten,
+                            Tongtien = g.Sum(x => x.Tongtien),
+                            Dienthoai = g.FirstOrDefault().Nguoidung.Dienthoai,
+                            Soluong = g.Count()
+                        });
+              var dataFinal = dataThongke.OrderByDescending(s => s.Tongtien).Take(5).ToList();
+              return View(dataFinal);
+          }*/
+
         public ActionResult Index()
         {
             var donhangs = db.Donhangs.ToList();
             var dataThongke = (from s in db.Donhangs
-                      join x in db.Nguoidungs on s.MaNguoidung equals x.MaNguoiDung
-                      group s by s.MaNguoidung into g
-                      select new Thongke
-                      {
-                          Tennguoidung = g.FirstOrDefault().Nguoidung.Hoten,
-                          Tongtien = g.Sum(x => x.Tongtien),
-                          Dienthoai = g.FirstOrDefault().Nguoidung.Dienthoai,
-                          Soluong = g.Count()
-                      });
+                               join x in db.Nguoidungs on s.MaNguoidung equals x.MaNguoiDung
+                               group s by s.MaNguoidung into g
+                               select new Thongke
+                               {
+                                   Tennguoidung = g.FirstOrDefault().Nguoidung.Hoten,
+                                   Tongtien = g.Sum(x => x.Tongtien),
+                                   Dienthoai = g.FirstOrDefault().Nguoidung.Dienthoai,
+                                   Soluong = g.Count()
+                               });
             var dataFinal = dataThongke.OrderByDescending(s => s.Tongtien).Take(5).ToList();
+
+            if (Request.IsAjaxRequest())
+            {
+                return Json(dataFinal, JsonRequestBehavior.AllowGet);
+            }
+
             return View(dataFinal);
         }
+
+
     }
 }

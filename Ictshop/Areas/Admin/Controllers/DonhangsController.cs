@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -34,6 +35,21 @@ namespace Ictshop.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             return View(donhang);
+        }
+
+        public ActionResult Detailsp(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Donhang donhang = db.Donhangs.Find(id);
+            var chitiet = db.Chitietdonhangs.Include(d => d.Sanpham).Where(d => d.Madon == id).ToList();
+            if (donhang == null)
+            {
+                return HttpNotFound();
+            }
+            return View(chitiet);
         }
 
         // GET: Admin/Donhangs/Create

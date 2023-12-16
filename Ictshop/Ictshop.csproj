@@ -1358,6 +1358,7 @@
     <Content Include="Areas\Admin\Views\Donhangs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Donhangs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Thongkes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Donhangs\Detailsp.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
